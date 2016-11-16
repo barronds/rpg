@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="./libs/jquery-3.1.1.js"></script>
+	<link rel="stylesheet" type="text/css" href="./main.css">
+</head>
+
+<body bgcolor="black">
+
+	<form>
+		<span id="cursor"></span>
+	</form>
+	
+	<script src = "./code/main.js"></script>
+	
+	<script>
+
+		$(document).keydown(function(e){
+			inputParserCode( e.keyCode );
+		});
+		
+		$(document).keypress(function(event){
+		  inputParserChar( String.fromCharCode(event.which) ); 
+		});
+
+		setInterval( flashCursor, 500 );
+		
+	</script>
+
+</body>
+</html>
