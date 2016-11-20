@@ -16,20 +16,21 @@
 	<script src = "./code/fixed_circular_buffer.js"></script>
 	<script src = "./code/fixed_queue.js"></script>
 	<script src = "./code/fixed_stack.js"></script>
+	<script src = "./code/input_parser.js"></script>
 	<script src = "./code/main.js"></script>
 	<script src = "./code/tests.js"></script>
 		
 	<script>
 
 		$(document).keydown(function(e){
-			inputParserCode( e.keyCode );
+			InputParser.InputParserCode( e.keyCode );
 		});
 		
 		$(document).keypress(function(event){
-		  inputParserChar( String.fromCharCode(event.which) ); 
+		  InputParser.InputParserChar( String.fromCharCode(event.which) ); 
 		});
 
-		setInterval( flashCursor, 500 );
+		setInterval( InputParser.FlashCursor, 500 );
 		
 	</script>
 

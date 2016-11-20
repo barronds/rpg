@@ -21,6 +21,12 @@ Util.Warning = function( cond, options )
 }
 
 
+Util.Clamp = function( min, max, value )
+{
+	return (value > max) ? max : (value < min) ? min : value;
+}
+
+
 Util._BuildAndLogMsg = function( alert_kind, options )
 {
 	options = options || {};
