@@ -101,6 +101,8 @@ InputParser.prototype._InputParserChar = function( c )
 			
 		self.console_text = "";
 		self.command_stack_cursor = -1;
+		
+		self._ParseCommand( trimmed );
 	}
 	
 	self._ForceCursor();
@@ -130,5 +132,61 @@ InputParser.prototype._InputParserCode = function( keycode )
 	self._RenderConsoleDisplayText();
 }
 
+
+InputParser.prototype._ParseCommand = function( command )
+{
+	// todo:
+	// check on syntax for switch.
+	// maybe data drive responses.
+	// look into tokenize for all the tokens that might be in the input.
+	var self = this;
+	var tokens = InputParser._Tokenize( command );
+
+	if( tokens[ 0 ] == "alias" )
+	{
+		if( tokens.length < 3 )
+		{
+			console.log( "usage: alias [alias-name] [alias-target[s]]" );
+		}
+	}
+}
+
+
+InputParser._Tokenize = function( str )
+{
+	var result = [];
+	var token_found = false;
+	var token = "";
+	var c = null;
+	
+	for( var i = 0; i < str.length; ++ i )
+	{
+		c = str.charAt( i );
+		if( !token_found && c != " " )
+		{
+			token_found = true;
+			token = "";
+		}
+		
+		if( token_found && c == " " )
+		{
+			token_found = false;
+			result.push( token );
+		}
+		
+		if( token_found )
+		{
+			token += c;
+		}
+	}
+	
+	// pick up the last token if there are tokens.  (input is assumed to be trimmed)
+	if( token_found )
+	{
+		result.push( token );
+	}
+	
+	return result;
+}
 
 

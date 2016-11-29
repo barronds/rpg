@@ -42,3 +42,6 @@ Util._GetAlertPrefix = function( channel )
 {
 	return channel ? "[" + channel + "]: " : "" ;
 }
+
+
+
