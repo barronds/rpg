@@ -1,4 +1,4 @@
 
 InputParser.StaticInit();
-
+Presentation.StaticInit();
 
