@@ -24,7 +24,19 @@ Presentation.prototype._Render = function()
 	}
 	
 	document.getElementById( "cursor_prefix" ).innerHTML = "welcome" + self.console_prompt;
-	//document.getElementById( "feedback" ).innerHTML = "unknown command";
+	document.getElementById( "feedback" ).innerHTML = "unknown command";
+}
+
+
+Presentation.prototype.RenderConsoleDisplayText = function( console_text_display )
+{
+	document.getElementById( "cursor" ).innerHTML = console_text_display;	
+}
+
+
+Presentation.prototype.RenderFeedback = function( feedback )
+{
+	document.getElementById( "feedback" ).innerHTML = feedback; 
 }
 
 

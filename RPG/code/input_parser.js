@@ -79,14 +79,14 @@ InputParser.prototype._RenderConsoleDisplayText = function()
 		self.console_text_display += self.cursor_text;
 	}
 	
-	document.getElementById( "cursor" ).innerHTML = self.console_text_display;	
+	Presentation.Get().RenderConsoleDisplayText( self.console_text_display );
 }
 
 
 InputParser.prototype._RenderFeedback = function()
 {
 	var self = this;
-	document.getElementById( "feedback" ).innerHTML = self.unknown_command ? "UNKNOWN COMMAND" : ""; 
+	Presentation.Get().RenderFeedback( self.unknown_command ? "UNKNOWN COMMAND" : "" )
 }
 
 
