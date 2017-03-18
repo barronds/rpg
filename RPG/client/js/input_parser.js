@@ -151,6 +151,12 @@ InputParser.prototype._InputParserChar = function( c )
 		{
 			self.command_stack.Push( trimmed );
 			
+			console.log( 'getJSON' );
+			$.getJSON( "http://localhost:8080/rpg", {}, function( data ) {
+				console.log( "returned " + JSON.stringify( data, null, 4 ) + " from the server" );
+			});
+			console.log( 'getJSON call finished' );
+			
 			if( !self.commands[ self.console_text ] )
 			{
 				self.unknown_command = true;
