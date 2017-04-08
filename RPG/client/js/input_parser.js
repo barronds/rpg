@@ -152,7 +152,7 @@ InputParser.prototype._InputParserChar = function( c )
 			self.command_stack.Push( trimmed );
 			
 			console.log( 'getJSON' );
-			$.getJSON( "http://localhost:8080/rpg", {}, function( data ) {
+			$.getJSON( "http://localhost:8080/rpg", { _id: "1234", command: self.console_text }, function( data ) {
 				console.log( "returned " + JSON.stringify( data, null, 4 ) + " from the server" );
 			});
 			console.log( 'getJSON call finished' );

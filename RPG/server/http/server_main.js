@@ -1,10 +1,13 @@
 
 // run with 'node ./http/server_main.js' from 'server' directory
 
-var HttpDispatcher = require('httpdispatcher');
-var http           = require('http');
-var dispatcher     = new HttpDispatcher();
+var HttpDispatcher	= require('httpdispatcher');
+var http			= require('http');
+var MongoTest		= require('./mongotest');
+
+var mongo_test = new MongoTest();
  
+var dispatcher = new HttpDispatcher();
 dispatcher.setStatic('/resources');
 dispatcher.setStaticDirname('static');
 
@@ -31,9 +34,12 @@ dispatcher.onGet("/page1", function(req, res) {
 
 dispatcher.onGet("/rpg", function(req, res) {
 	console.log( "hitting /rpg route" );
+	var decoded_url = decodeURI( req.url );
+	console.log( "inbound data: ", decoded_url );
+	mongo_test.execute( decoded_url );
     res.writeHead(200, {'Content-Type': 'application/json'});
     res.end( JSON.stringify( { result:'hello rpg!' } ) );
-});    
+});
 
 //A sample POST request
 dispatcher.onPost("/post1", function(req, res) {

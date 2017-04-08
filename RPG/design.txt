@@ -1,0 +1,16 @@
+workflow:
+
+main.html runs in the browser (chrome)
+
+server_main.js runs from a power shell command like so:
+PS C:\Users\Dean\Documents\programs\rpg\RPG\server\http> node .\server_main.js
+
+in another ps, launch mongo like so
+PS C:\Program Files\MongoDB\Server\3.4\bin> ./mongod.exe
+
+in yet another ps, launch a mongo terminal like so for inspecting the databases
+PS C:\Program Files\MongoDB\Server\3.4\bin> mongo.exe
+
+
+random design ideas:
+
