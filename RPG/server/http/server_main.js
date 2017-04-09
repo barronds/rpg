@@ -38,7 +38,7 @@ dispatcher.onGet("/rpg", function(req, res) {
 	console.log( "inbound data: ", decoded_url );
 	mongo_test.execute( decoded_url );
     res.writeHead(200, {'Content-Type': 'application/json'});
-    res.end( JSON.stringify( { result:'hello rpg!' } ) );
+    res.end( JSON.stringify( { result: 'processed ' + decoded_url } ) );
 });
 
 //A sample POST request

@@ -12,8 +12,6 @@ function InputParser()
 	self.cursor_forced			= false;
 	self.command_stack 			= new FixedStack( 20, { allow_push_on_full: true } );
 	self.command_stack_cursor	= -1;
-	self.commands 				= {};
-	self.unknown_command		= false;
 }
 
 
@@ -38,14 +36,6 @@ InputParser.InputParserCode = function( keycode )
 InputParser.FlashCursor = function()
 {
 	InputParser._sInstance._FlashCursor();
-}
-
-
-InputParser.prototype.RegisterCommand = function( command, callback )
-{
-	var self = this;
-	Util.Assert( !self.commands[ command ], "command already exists", "Input Parser Commands" );
-	self.commands[ command ] = callback;
 }
 
 
@@ -80,28 +70,6 @@ InputParser.prototype._RenderConsoleDisplayText = function()
 	}
 	
 	Presentation.Get().RenderConsoleDisplayText( self.console_text_display );
-}
-
-
-InputParser.prototype._RenderFeedback = function()
-{
-	var self = this;
-	Presentation.Get().RenderFeedback( self.unknown_command ? "UNKNOWN COMMAND" : "" )
-}
-
-
-InputParser._ClearFeedback = function()
-{
-	console.log( "clearing feedback" );
-	InputParser._sInstance._ClearFeedback();
-}
-
-
-InputParser.prototype._ClearFeedback = function()
-{
-	var self = this;
-	self.unknown_command = false;
-	self._RenderFeedback();
 }
 
 
@@ -151,27 +119,14 @@ InputParser.prototype._InputParserChar = function( c )
 		{
 			self.command_stack.Push( trimmed );
 			
-			console.log( 'getJSON' );
 			$.getJSON( "http://localhost:8080/rpg", { _id: "1234", command: self.console_text }, function( data ) {
-				console.log( "returned " + JSON.stringify( data, null, 4 ) + " from the server" );
+				Presentation.Get().RenderResponse( data );
 			});
-			console.log( 'getJSON call finished' );
-			
-			if( !self.commands[ self.console_text ] )
-			{
-				self.unknown_command = true;
-				console.log( "unknown command" );
-				// TODO : this doesn't work right
-				// want it called once after time elapsed
-				setInterval( 2000, InputParser._ClearFeedback() );
-			}
 		}
 			
 		self.console_text = "";
 		self.command_stack_cursor = -1;
 		self.cursor_pos = 0;
-		
-		self._ParseCommand( trimmed );
 	}
 	
 	self._ForceCursor();
@@ -215,25 +170,6 @@ InputParser.prototype._InputParserCode = function( keycode )
 	
 	self._ForceCursor();
 	self._RenderConsoleDisplayText();
-}
-
-
-InputParser.prototype._ParseCommand = function( command )
-{
-	// todo:
-	// check on syntax for switch.
-	// maybe data drive responses.
-	// look into tokenize for all the tokens that might be in the input.
-	var self = this;
-	var tokens = InputParser._Tokenize( command );
-
-	if( tokens[ 0 ] == "alias" )
-	{
-		if( tokens.length < 3 )
-		{
-			console.log( "usage: alias [alias-name] [alias-target[s]]" );
-		}
-	}
 }
 
 
