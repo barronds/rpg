@@ -1,0 +1,6 @@
+
+doing work in input_parser.js right now, see todo's within.
+- doing work in commands.js as well.
+
+- get 'require' working, remove code files from html if possible.
+(maybe it is working in server code because that's in a node environment and the client is not)

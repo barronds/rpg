@@ -1,4 +1,7 @@
 
+// TODO: require not working wtf
+//var Account = require( 'Account' );
+
 
 function InputParser()
 {
@@ -118,8 +121,17 @@ InputParser.prototype._InputParserChar = function( c )
 		if( trimmed.length > 0 )
 		{
 			self.command_stack.Push( trimmed );
+
+			// TODO: have client-only commands like 'help', 'login', etc.
+			// only commamds that require server interaction should go to the server.
 			
-			$.getJSON( "http://localhost:8080/rpg", { _id: "1234", command: self.console_text }, function( data ) {
+			// TODO: just created 'commands.js' to own parsing commands for clients and server.
+						
+			// TODO: just trying account stuff
+			// Account.login( "jimmy" );
+			// var username = Account.getUsername();
+			var username = "jimmy";
+			$.getJSON( "http://localhost:8080/rpg", { username: username, command: self.console_text }, function( data ) {
 				Presentation.Get().RenderResponse( data );
 			});
 		}
